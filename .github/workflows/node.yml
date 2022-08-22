@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     # possibility for tests
     steps:
+      # Access code in repo
       - uses: actions/checkout@v3
       - name: "Setting up node v16 in workflow"
         uses: actions/setup-node@v3
@@ -19,3 +20,14 @@ jobs:
           node-version: 16
       - run: "npm install"
       - run: "npm run build"
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Setting up node/eslint testing js-files"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: "npm install"
+      # Test all js-files with eslint
+      - run: npx eslint src/*.jsx
